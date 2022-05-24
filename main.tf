@@ -28,3 +28,16 @@ resource "tfe_workspace" "workspace" {
   }
   // lifecycle { prevent_destroy = true }
 }
+
+resource "tfe_variable" "this" {
+  for_each = var.tfe_variables
+
+  key             = each.key                           # (Required) Name of the variable.
+  value           = each.value.value                   # (Required) Value of the variable.
+  category        = each.value.category                # (Required) Whether this is a Terraform or environment variable. Valid values are terraform or env.
+  description     = try(each.value.description, null)  # (Optional) Description of the variable.
+  hcl             = try(each.value.description, null)  # (Optional) Whether to evaluate the value of the variable as a string of HCL code. Has no effect for environment variables. Defaults to false.
+  sensitive       = try(each.value.sensitive, null)    # (Optional) Whether the value is sensitive. If true then the variable is written once and not visible thereafter. Defaults to false.
+  workspace_id    = try(each.value.workspace_id, null) # (Required or variable_set_id not both) ID of the workspace that owns the variable.
+  variable_set_id = try(each.value.workspace_id, null) # (Required or variable_set_id not both) ID of the variable set that owns the variable.
+}

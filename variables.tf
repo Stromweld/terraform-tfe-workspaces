@@ -39,3 +39,8 @@ variable "speculative_enabled" {
   default     = true
   description = "Enable speculative plans"
 }
+variable "tfe_variables" {
+  type        = map(any)
+  default     = {}
+  description = "Set workspace variables"
+}
