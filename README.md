@@ -33,6 +33,7 @@ module "tfc-workspace" {
 | `repo_identifier` | string | null | no | VCS identifier to link repo to |
 | `oauth_token_id` | string | null | no | Oauth Token for VCS provider configured in TFC |
 | `speculative_enabled` | bool | true | no | Enable speculative plans |
+| `tfe_variables` | map(any) | {} | no | Set workspace variables |
 
 ## Outputs
 
