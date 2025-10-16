@@ -24,11 +24,6 @@ variable "vcs_repo" {
   }
   description = "Used to add VCS repo to workspace"
 }
-variable "repo_identifier" {
-  type        = string
-  default     = null
-  description = "VCS identifier to link repo to"
-}
 variable "speculative_enabled" {
   type        = bool
   default     = true

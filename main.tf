@@ -16,7 +16,7 @@ resource "tfe_workspace" "workspace" {
   dynamic "vcs_repo" {                                               # (Optional) Settings for the workspace's VCS repository, enabling the UI/VCS-driven run workflow. Omit this argument to utilize the CLI-driven and API-driven workflows, where runs are not driven by webhooks on your VCS provider.
     for_each = var.vcs_repo["enabled"] ? { vcs_settings = var.vcs_repo } : {}
     content {
-      identifier                 = var.repo_identifier                                     # (Required) A reference to your VCS repository in the format :org/:repo where :org and :repo refer to the organization and repository in your VCS provider.
+      identifier                 = vcs_repo.value["identifier"]                            # (Required) A reference to your VCS repository in the format :org/:repo where :org and :repo refer to the organization and repository in your VCS provider.
       branch                     = try(vcs_repo.value["branch"], "main")                   # (Optional) The repository branch that Terraform will execute from. Default to main.
       github_app_installation_id = try(vcs_repo.value["github_app_installation_id"], null) # (Optional) The installation id of the Github App. This conflicts with oauth_token_id and can only be used if oauth_token_id is not used.
       ingress_submodules         = try(vcs_repo.value["ingress_submodules"], false)        # (Optional) Whether submodules should be fetched when cloning the VCS repository. Defaults to false.
