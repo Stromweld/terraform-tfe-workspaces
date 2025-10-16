@@ -12,17 +12,17 @@ jobs:
   json-lint:
     uses: Stromweld/github-workflows/.github/workflows/json-lint.yml@main
 
-  terraforml-int:
+  terraform-lint:
     uses: Stromweld/github-workflows/.github/workflows/terraform-lint.yml@main
     secrets: inherit
 
   check:
     if: always()
     needs:
-      - markdownlint
-      - yamllint
-      - jsonlint
-      - terraformlint
+      - markdown-lint
+      - yaml-lint
+      - json-lint
+      - terraform-lint
     runs-on: Ubuntu-latest
     steps:
       - name: Decide whether the needed jobs succeeded or failed
